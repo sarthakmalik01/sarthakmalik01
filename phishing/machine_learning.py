@@ -14,8 +14,19 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 
 # Load data
-legitimate_df = pd.read_csv("structured_data_legitimate.csv")
-phishing_df = pd.read_csv("structured_data_phishing.csv")
+import os
+
+# Get the directory where this script (machine_learning.py) is located
+base_path = os.path.dirname(__file__)
+
+# Build full paths to the CSV files
+legitimate_csv = os.path.join(base_path, "structured_data_legitimate.csv")
+phishing_csv = os.path.join(base_path, "structured_data_phishing.csv")
+
+# Read the CSVs safely
+legitimate_df = pd.read_csv(legitimate_csv)
+phishing_df = pd.read_csv(phishing_csv)
+
 
 # Combine and shuffle
 df = pd.concat([legitimate_df, phishing_df], axis=0).sample(frac=1, random_state=42)
